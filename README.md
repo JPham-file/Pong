@@ -1,1 +1,1 @@
-Pong
+Pong, just a simple Pong game.
