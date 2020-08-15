@@ -19,12 +19,35 @@ opponent = pygame.Rect(10, screen_height/2 -70, 10, 140)
 bg_color = pygame.Color('grey12')
 light_grey = (200, 200, 200)
 
+
+ball_speed_x = 7
+ball_speed_y = 7
+
+def ball_animation():
+    global ball_speed_x, ball_speed_y
+
+    ball.x += ball_speed_x
+    ball.y += ball_speed_y
+    if ball.top <= 0 or ball.bottom >= screen_height:
+        ball_speed_y *= -1
+    if ball.left <= 0 or ball.right >= screen_width:
+        ball_speed_x *= -1
+
+    if ball.colliderect(player) or ball.colliderect(opponent):
+        ball_speed_x *= -1
+
+
+
+
 running = True 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
+    ball_animation()
+
 
     screen.fill(bg_color)
     pygame.draw.rect(screen, light_grey, player)
